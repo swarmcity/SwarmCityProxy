@@ -1,0 +1,12 @@
+# Use Ubuntu 'trusty' distribution
+sudo: required
+dist: trusty
+
+services:
+  - docker
+
+install:
+  - docker build -t swarmcity_proxy .
+
+script:
+- docker images swarmcity_proxy
