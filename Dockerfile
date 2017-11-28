@@ -2,7 +2,7 @@ FROM nginx:stable
 
 RUN apt-get -y update && \
     apt-get install -y \
-    openssl
+    openssl curl
 
 
 RUN mkdir -p /data/nginx/cache /etc/nginx/sites-enabled/ /etc/nginx/sites-available/
