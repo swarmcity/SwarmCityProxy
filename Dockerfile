@@ -7,14 +7,12 @@ RUN apt-get -y update && \
 
 RUN mkdir -p /data/nginx/cache /etc/nginx/sites-enabled/ /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/site /etc/nginx/sites-enabled/
-RUN ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled/
 RUN openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 RUN chown -R www-data:www-data /data
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY ssl-params.conf /etc/nginx/snippets/ssl-params.conf
 COPY site /etc/nginx/sites-available/site
-COPY api /etc/nginx/sites-available/api
 COPY startup startup
 
 VOLUME ["/etc/nginx/ssl"]
