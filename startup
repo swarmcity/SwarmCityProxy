@@ -16,14 +16,6 @@ else
   echo "SITE_HOSTNAME=${SITE_HOSTNAME}"
 fi
 
-if [[ -z "${API_HOSTNAME}" ]]; then
-  echo "Set \"API_HOSTNAME\" environment variable."
-  exit 1 
-else
-  API_HOSTNAME="$(echo -e "${API_HOSTNAME}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
-  echo "API_HOSTNAME=${API_HOSTNAME}"
-fi
-
 echo "Validating SSL certificates and keys ..."
 if [ ! -f "/etc/nginx/ssl/${SITE_HOSTNAME}/fullchain.pem" ]; then
   echo "File /etc/nginx/ssl/${SITE_HOSTNAME}/fullchain.pem not found!"
@@ -35,19 +27,8 @@ if [ ! -f "/etc/nginx/ssl/${SITE_HOSTNAME}/privkey.pem" ]; then
   exit 1 
 fi
 
-if [ ! -f "/etc/nginx/ssl/${API_HOSTNAME}/fullchain.pem" ]; then
-  echo "File /etc/nginx/ssl/${API_HOSTNAME}/fullchain.pem not found!"
-  exit 1 
-fi
-
-if [ ! -f "/etc/nginx/ssl/${API_HOSTNAME}/privkey.pem" ]; then
-  echo "File /etc/nginx/ssl/${API_HOSTNAME}/privkey.pem not found!"
-  exit 1 
-fi
-
 echo "Updating configurations ..."
 sed -i "s/SITE_HOSTNAME/${SITE_HOSTNAME}/g" /etc/nginx/sites-available/site
-sed -i "s/API_HOSTNAME/${API_HOSTNAME}/g" /etc/nginx/sites-available/api
 
 echo "Running Nginx config test ..."
 nginx -t
