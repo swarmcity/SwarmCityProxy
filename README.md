@@ -2,8 +2,11 @@
 
 [![Build Status](https://travis-ci.org/swarmcity/SwarmCityProxy.svg?branch=master)](https://travis-ci.org/swarmcity/SwarmCityProxy)
 
-# Swarm City
-### SwarmCityProxy
+# Swarm City Proxy
+
+## Introduction
+
+The nginx proxy uses the certs to serve and cache the site securely and allows us to have fine grained access control to the site, allowing us to block single users or IP ranges instead of bringing the services down. https://www.nginx.com/
 
 ## Install dependencies
 
